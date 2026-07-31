@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#111827" />
+  <title>Poker Defense Calculator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="header">
+      <p class="eyebrow">POKER TOOL</p>
+      <h1>Defense Calculator</h1>
+      <p class="description">
+        ポットサイズとベットサイズから、MDFと適正ブラフ率を計算します。
+      </p>
+    </header>
+
+    <section class="panel input-panel" aria-labelledby="input-heading">
+      <h2 id="input-heading">入力</h2>
+
+      <div class="field">
+        <label for="potSize">ポットサイズ</label>
+        <div class="input-wrap">
+          <input
+            id="potSize"
+            type="number"
+            min="0"
+            step="any"
+            inputmode="decimal"
+            value="100"
+            aria-describedby="pot-error"
+          />
+          <span class="unit">chips</span>
+        </div>
+        <p id="pot-error" class="error" aria-live="polite"></p>
+      </div>
+
+      <div class="field">
+        <label for="betSize">ベットサイズ</label>
+        <div class="input-wrap">
+          <input
+            id="betSize"
+            type="number"
+            min="0"
+            step="any"
+            inputmode="decimal"
+            value="75"
+            aria-describedby="bet-error"
+          />
+          <span class="unit">chips</span>
+        </div>
+        <p id="bet-error" class="error" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class="results" aria-label="計算結果">
+      <article class="result-card featured">
+        <p class="result-label">ベットサイズ</p>
+        <p id="betRatio" class="result-value">75.0%</p>
+        <p class="result-note">ポット比</p>
+      </article>
+
+      <article class="result-card">
+        <p class="result-label">MDF</p>
+        <p id="mdf" class="result-value">57.1%</p>
+        <p class="result-note">最小守備頻度</p>
+      </article>
+
+      <article class="result-card">
+        <p class="result-label">適正ブラフ率</p>
+        <p id="bluffFrequency" class="result-value">30.0%</p>
+        <p class="result-note">ベットレンジ中のブラフ割合</p>
+      </article>
+
+      <article class="result-card">
+        <p class="result-label">バリュー：ブラフ</p>
+        <p id="valueBluffRatio" class="result-value">2.33 : 1</p>
+        <p class="result-note">適正レンジ構成</p>
+      </article>
+    </section>
+
+    <section class="formula-panel" aria-label="計算式">
+      <details>
+        <summary>計算式を見る</summary>
+        <div class="formula-list">
+          <p><strong>ベット比</strong> = B ÷ P</p>
+          <p><strong>MDF</strong> = P ÷ (P + B)</p>
+          <p><strong>適正ブラフ率</strong> = B ÷ (P + 2B)</p>
+          <p><strong>バリュー：ブラフ</strong> = (P + B) ÷ B ：1</p>
+        </div>
+      </details>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
