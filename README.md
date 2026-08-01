@@ -1,31 +1,30 @@
-# Poker Defense Calculator v2
+# Poker Defense Calculator
+
+最初のバージョンのデザインを維持し、計算結果の先頭に Pot Odds を追加した版です。
 
 ## 表示項目
 
-- Pot Size
-- Bet Size
-- Bet Size (% Pot)
 - Pot Odds
+- ベットサイズのポット比
 - MDF
-- Required Folds
-- Optimal Bluff Frequency
-- Value : Bluff
-- Risk : Reward
+- 適正ブラフ率
+- バリュー：ブラフ比率
 
-## 100 pot / 75 bet の計算結果
+## 使い方
 
-- Bet Size: 75.0% Pot
-- Pot Odds: 30.0%
-- MDF: 57.1%
-- Required Folds: 42.9%
-- Optimal Bluff Frequency: 30.0%
-- Value : Bluff: 2.33 : 1
-- Risk : Reward: 1 : 1.33
+`index.html` をブラウザで開いてください。
 
-`42.9%` は Pot Odds ではなく、ブラフが即時利益を得るための Required Folds
-（必要フォールド率、1 - MDF）です。
+GitHub Pagesを更新する場合は、既存リポジトリの以下のファイルを置き換えてコミットします。
 
-## GitHub Pagesへの反映
+- `index.html`
+- `style.css`
+- `script.js`
+- `README.md`
 
-既存リポジトリの `index.html`、`style.css`、`script.js`、`README.md` を
-このフォルダ内のファイルで置き換えてコミットしてください。
+## 計算式
+
+- Pot Odds = B / (P + 2B)
+- Bet Ratio = B / P
+- MDF = P / (P + B)
+- Optimal Bluff Frequency = B / (P + 2B)
+- Value : Bluff = (P + B) / B : 1
