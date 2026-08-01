@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#111827" />
+  <meta name="theme-color" content="#0b1220" />
   <title>Poker Defense Calculator</title>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -13,82 +13,85 @@
       <p class="eyebrow">POKER TOOL</p>
       <h1>Defense Calculator</h1>
       <p class="description">
-        ポットサイズとベットサイズから、MDFと適正ブラフ率を計算します。
+        Pot Size と Bet Size から、ディフェンスとブラフに関する基準値を計算します。
       </p>
     </header>
 
-    <section class="panel input-panel" aria-labelledby="input-heading">
-      <h2 id="input-heading">入力</h2>
+    <section class="panel inputs" aria-label="入力">
+      <label class="input-row" for="potSize">
+        <span>Pot Size</span>
+        <input id="potSize" type="number" min="0" step="any" value="100" inputmode="decimal" />
+      </label>
 
-      <div class="field">
-        <label for="potSize">ポットサイズ</label>
-        <div class="input-wrap">
-          <input
-            id="potSize"
-            type="number"
-            min="0"
-            step="any"
-            inputmode="decimal"
-            value="100"
-            aria-describedby="pot-error"
-          />
-          <span class="unit">chips</span>
-        </div>
-        <p id="pot-error" class="error" aria-live="polite"></p>
-      </div>
+      <label class="input-row" for="betSize">
+        <span>Bet Size</span>
+        <input id="betSize" type="number" min="0" step="any" value="75" inputmode="decimal" />
+      </label>
 
-      <div class="field">
-        <label for="betSize">ベットサイズ</label>
-        <div class="input-wrap">
-          <input
-            id="betSize"
-            type="number"
-            min="0"
-            step="any"
-            inputmode="decimal"
-            value="75"
-            aria-describedby="bet-error"
-          />
-          <span class="unit">chips</span>
-        </div>
-        <p id="bet-error" class="error" aria-live="polite"></p>
+      <p id="errorMessage" class="error" aria-live="polite"></p>
+    </section>
+
+    <section class="panel summary" aria-label="ベットサイズ">
+      <div class="metric-row">
+        <span class="metric-name">Bet Size</span>
+        <strong id="betRatio">75.0% Pot</strong>
       </div>
     </section>
 
-    <section class="results" aria-label="計算結果">
-      <article class="result-card featured">
-        <p class="result-label">ベットサイズ</p>
-        <p id="betRatio" class="result-value">75.0%</p>
-        <p class="result-note">ポット比</p>
-      </article>
+    <section class="panel metrics" aria-label="計算結果">
+      <div class="metric-row">
+        <div>
+          <span class="metric-name">Pot Odds</span>
+          <small>コールに必要な最低勝率</small>
+        </div>
+        <strong id="potOdds">30.0%</strong>
+      </div>
 
-      <article class="result-card">
-        <p class="result-label">MDF</p>
-        <p id="mdf" class="result-value">57.1%</p>
-        <p class="result-note">最小守備頻度</p>
-      </article>
+      <div class="metric-row">
+        <div>
+          <span class="metric-name">MDF</span>
+          <small>Minimum Defense Frequency</small>
+        </div>
+        <strong id="mdf">57.1%</strong>
+      </div>
 
-      <article class="result-card">
-        <p class="result-label">適正ブラフ率</p>
-        <p id="bluffFrequency" class="result-value">30.0%</p>
-        <p class="result-note">ベットレンジ中のブラフ割合</p>
-      </article>
-
-      <article class="result-card">
-        <p class="result-label">バリュー：ブラフ</p>
-        <p id="valueBluffRatio" class="result-value">2.33 : 1</p>
-        <p class="result-note">適正レンジ構成</p>
-      </article>
+      <div class="metric-row">
+        <div>
+          <span class="metric-name">Required Folds</span>
+          <small>ベッター側の必要フォールド率</small>
+        </div>
+        <strong id="requiredFolds">42.9%</strong>
+      </div>
     </section>
 
-    <section class="formula-panel" aria-label="計算式">
+    <section class="panel stacked-metrics" aria-label="レンジ構成">
+      <div class="stacked-metric">
+        <span class="metric-name">Optimal Bluff Frequency</span>
+        <strong id="bluffFrequency">30.0%</strong>
+      </div>
+
+      <div class="stacked-metric">
+        <span class="metric-name">Value : Bluff</span>
+        <strong id="valueBluffRatio">2.33 : 1</strong>
+      </div>
+
+      <div class="stacked-metric">
+        <span class="metric-name">Risk : Reward</span>
+        <strong id="riskRewardRatio">1 : 1.33</strong>
+      </div>
+    </section>
+
+    <section class="formula-panel">
       <details>
-        <summary>計算式を見る</summary>
+        <summary>計算式</summary>
         <div class="formula-list">
-          <p><strong>ベット比</strong> = B ÷ P</p>
+          <p><strong>Bet Size</strong> = B ÷ P</p>
+          <p><strong>Pot Odds</strong> = B ÷ (P + 2B)</p>
           <p><strong>MDF</strong> = P ÷ (P + B)</p>
-          <p><strong>適正ブラフ率</strong> = B ÷ (P + 2B)</p>
-          <p><strong>バリュー：ブラフ</strong> = (P + B) ÷ B ：1</p>
+          <p><strong>Required Folds</strong> = B ÷ (P + B)</p>
+          <p><strong>Optimal Bluff Frequency</strong> = B ÷ (P + 2B)</p>
+          <p><strong>Value : Bluff</strong> = (P + B) ÷ B : 1</p>
+          <p><strong>Risk : Reward</strong> = 1 : P ÷ B</p>
         </div>
       </details>
     </section>

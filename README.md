@@ -1,22 +1,31 @@
-# Poker Defense Calculator
+# Poker Defense Calculator v2
 
-ポットサイズとベットサイズを入力すると、以下をリアルタイムで計算するシンプルなWebアプリです。
+## 表示項目
 
-- ベットサイズのポット比
-- MDF（最小守備頻度）
-- 適正ブラフ率
-- バリュー：ブラフ比率
+- Pot Size
+- Bet Size
+- Bet Size (% Pot)
+- Pot Odds
+- MDF
+- Required Folds
+- Optimal Bluff Frequency
+- Value : Bluff
+- Risk : Reward
 
-## 使い方
+## 100 pot / 75 bet の計算結果
 
-`index.html` をブラウザで開いてください。
+- Bet Size: 75.0% Pot
+- Pot Odds: 30.0%
+- MDF: 57.1%
+- Required Folds: 42.9%
+- Optimal Bluff Frequency: 30.0%
+- Value : Bluff: 2.33 : 1
+- Risk : Reward: 1 : 1.33
 
-GitHub Pagesで公開する場合は、フォルダ内のファイルをリポジトリ直下に配置して、
-Settings → Pages から公開できます。
+`42.9%` は Pot Odds ではなく、ブラフが即時利益を得るための Required Folds
+（必要フォールド率、1 - MDF）です。
 
-## 計算式
+## GitHub Pagesへの反映
 
-- Bet Ratio = B / P
-- MDF = P / (P + B)
-- Bluff Frequency = B / (P + 2B)
-- Value : Bluff = (P + B) / B : 1
+既存リポジトリの `index.html`、`style.css`、`script.js`、`README.md` を
+このフォルダ内のファイルで置き換えてコミットしてください。
